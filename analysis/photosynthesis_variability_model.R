@@ -7,14 +7,14 @@ library(R.utils)
 library(ggplot2)
 
 ## load up model and functions
-source('../model_code/photosynthesis_model.R')
-sourceDirectory('../model_code/functions')
+source('model_code/photosynthesis_model.R')
+sourceDirectory('model_code//functions')
 
 ## load data
-variability_treatment_data <- read.csv('../data/variability_treatment_data.csv')
-variability_vcmax25jmax25 <- read.csv('../data/variability_vcmax25jmax25.csv')
+variability_treatment_data <- read.csv('data/variability_treatment_data.csv')
+variability_vcmax25jmax25 <- read.csv('data/variability_vcmax25jmax25.csv')
 
-## run model
+## run model #########
 ### LTVLLV
 LTVLLV_model_output <- photosynthesis_model(vcmax25 = subset(variability_vcmax25jmax25, treatment == 'LTVLLV')$vcmax25,
                                             jmax25 = subset(variability_vcmax25jmax25, treatment == 'LTVLLV')$jmax25,
@@ -40,3 +40,84 @@ HTVHLV_model_output <- photosynthesis_model(vcmax25 = subset(variability_vcmax25
                                             temperature_c = subset(variability_treatment_data, treatment == 'HTVHLV')$temp)
 
 
+
+## graph a, aj, ac
+
+LTVLLV_model_output$time <- c(0:23)
+select_ltvllv_data <- LTVLLV_model_output[ , c(18, 25, 26, 27)]
+select_ltvllv_long <- melt(select_ltvllv_data, id = "time", variable.name = "photosynthesis", value.name = "a_value")
+
+ltvllv_model_plot <- ggplot(select_ltvllv_long, aes(x = time, y = a_value, color = photosynthesis)) +
+  geom_line(size = .75) + theme_bw() + scale_x_continuous(breaks = seq(0, 23, 2)) +
+  labs(x = "Hours in a Day (00-23)", y = expression(italic("A")["LTVLLV"]*" ("*mu*"mol m"^"-2"*" s"^"-1"*")")) +
+  theme(legend.position = "top") + theme(legend.title= element_blank()) +
+  scale_y_continuous(breaks = seq(0, 20, by = 2)) +
+  scale_color_manual(values = c("#D55E00", "#009E73", "#0072B2"), 
+                     labels = c(expression("A"["c"]), expression("A"["j"]), expression("A"["net"]))) +
+  annotate("text", x = 2, y = 13, label = expression("A"["net"]* " = 588687.4 units?"))
+
+ltvllv_model_plot
+
+#########
+LTVHLV_model_output$time <- c(0:23)
+select_ltvhlv_data <- LTVHLV_model_output[ , c(18, 25, 26, 27)]
+select_ltvhlv_long <- melt(select_ltvhlv_data, id = "time", variable.name = "photosynthesis", value.name = "a_value")
+
+ltvhlv_model_plot <- ggplot(select_ltvhlv_long, aes(x = time, y = a_value, color = photosynthesis)) +
+  geom_line(size = .75) + theme_bw() + scale_x_continuous(breaks = seq(0, 23, 2)) +
+  labs(x = "Hours in a Day (00-23)", y = expression(italic("A")["LTVHLV"]*" ("*mu*"mol m"^"-2"*" s"^"-1"*")")) +
+  theme(legend.position = "top") + theme(legend.title= element_blank()) +
+  scale_y_continuous(breaks = seq(0, 20, by = 2)) +
+  scale_color_manual(values = c("#D55E00", "#009E73", "#0072B2"), 
+                     labels = c(expression("A"["c"]), expression("A"["j"]), expression("A"["net"]))) +
+  annotate("text", x = 2, y = 15, label = expression("A"["net"]* " = 537904.1 units?"))
+
+ltvhlv_model_plot
+
+##########
+HTVLLV_model_output$time <- c(0:23)
+select_htvllv_data <- HTVLLV_model_output[ , c(18, 25, 26, 27)]
+select_htvllv_long <- melt(select_htvllv_data, id = "time", variable.name = "photosynthesis", value.name = "a_value")
+
+htvllv_model_plot <- ggplot(select_htvllv_long, aes(x = time, y = a_value, color = photosynthesis)) +
+  geom_line(size = .75) + theme_bw() + scale_x_continuous(breaks = seq(0, 23, 2)) +
+  labs(x = "Hours in a Day (00-23)", y = expression(italic("A")["HTVLLV"]*" ("*mu*"mol m"^"-2"*" s"^"-1"*")")) +
+  theme(legend.position = "top") + theme(legend.title= element_blank()) +
+  scale_y_continuous(breaks = seq(0, 20, by = 2)) +
+  scale_color_manual(values = c("#D55E00", "#009E73", "#0072B2"), 
+                     labels = c(expression("A"["c"]), expression("A"["j"]), expression("A"["net"]))) +
+  annotate("text", x = 2, y = 13, label = expression("A"["net"]* " = 586879.4 units?"))
+
+htvllv_model_plot
+
+##########
+HTVHLV_model_output$time <- c(0:23)
+select_htvhlv_data <- HTVHLV_model_output[ , c(18, 25, 26, 27)]
+select_htvhlv_long <- melt(select_htvhlv_data, id = "time", variable.name = "photosynthesis", value.name = "a_value")
+
+htvhlv_model_plot <- ggplot(select_htvhlv_long, aes(x = time, y = a_value, color = photosynthesis)) +
+  geom_line(size = .75) + theme_bw() + scale_x_continuous(breaks = seq(0, 23, 2)) +
+  labs(x = "Hours in a Day (00-23)", y = expression(italic("A")["HTVHLV"]*" ("*mu*"mol m"^"-2"*" s"^"-1"*")")) +
+  theme(legend.position = "top") + theme(legend.title= element_blank()) +
+  scale_y_continuous(breaks = seq(0, 20, by = 2)) +
+  scale_color_manual(values = c("#D55E00", "#009E73", "#0072B2"), 
+                     labels = c(expression("A"["c"]), expression("A"["j"]), expression("A"["net"]))) +
+  annotate("text", x = 2, y = 15, label = expression("A"["net"]* " = 509523.4 units?"))
+
+htvhlv_model_plot
+
+## average Anet value in a day #######
+  # average "a" in a day * 86400 (number of seconds in day) = total photosynthesis in
+  # a day
+
+total_A_LTVLLV <- mean(LTVLLV_model_output$a)*86400
+total_A_LTVLLV # [1] 588687.4
+
+total_A_LTVHLV <- mean(LTVHLV_model_output$a)*86400
+total_A_LTVHLV # [1] 537904.1
+
+total_A_HTVLLV <- mean(HTVLLV_model_output$a)*86400
+total_A_HTVLLV # [1] 586879.4
+
+total_A_HTVHLV <- mean(HTVHLV_model_output$a)*86400
+total_A_HTVHLV # [1] 509523.4
