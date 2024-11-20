@@ -54,7 +54,7 @@ ltvllv_model_plot <- ggplot(select_ltvllv_long, aes(x = time, y = a_value, color
   scale_y_continuous(breaks = seq(0, 20, by = 2)) +
   scale_color_manual(values = c("#D55E00", "#009E73", "#0072B2"), 
                      labels = c(expression("A"["c"]), expression("A"["j"]), expression("A"["net"]))) +
-  annotate("text", x = 2, y = 13, label = expression("A"["net"]* " = 588687.4 units?"))
+  annotate("text", x = 2, y = 13, label = expression("A"["total"]* " = 588687.4 units?"))
 
 ltvllv_model_plot
 
@@ -70,7 +70,7 @@ ltvhlv_model_plot <- ggplot(select_ltvhlv_long, aes(x = time, y = a_value, color
   scale_y_continuous(breaks = seq(0, 20, by = 2)) +
   scale_color_manual(values = c("#D55E00", "#009E73", "#0072B2"), 
                      labels = c(expression("A"["c"]), expression("A"["j"]), expression("A"["net"]))) +
-  annotate("text", x = 2, y = 15, label = expression("A"["net"]* " = 537904.1 units?"))
+  annotate("text", x = 2, y = 15, label = expression("A"["total"]* " = 537904.1 units?"))
 
 ltvhlv_model_plot
 
@@ -86,7 +86,7 @@ htvllv_model_plot <- ggplot(select_htvllv_long, aes(x = time, y = a_value, color
   scale_y_continuous(breaks = seq(0, 20, by = 2)) +
   scale_color_manual(values = c("#D55E00", "#009E73", "#0072B2"), 
                      labels = c(expression("A"["c"]), expression("A"["j"]), expression("A"["net"]))) +
-  annotate("text", x = 2, y = 13, label = expression("A"["net"]* " = 586879.4 units?"))
+  annotate("text", x = 2, y = 13, label = expression("A"["total"]* " = 586879.4 units?"))
 
 htvllv_model_plot
 
@@ -102,7 +102,7 @@ htvhlv_model_plot <- ggplot(select_htvhlv_long, aes(x = time, y = a_value, color
   scale_y_continuous(breaks = seq(0, 20, by = 2)) +
   scale_color_manual(values = c("#D55E00", "#009E73", "#0072B2"), 
                      labels = c(expression("A"["c"]), expression("A"["j"]), expression("A"["net"]))) +
-  annotate("text", x = 2, y = 15, label = expression("A"["net"]* " = 509523.4 units?"))
+  annotate("text", x = 2, y = 15, label = expression("A"["total"]* " = 509523.4 units?"))
 
 htvhlv_model_plot
 
