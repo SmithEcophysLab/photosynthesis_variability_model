@@ -5,6 +5,8 @@
 # install.packages('R.utils')
 library(R.utils)
 library(ggplot2)
+library(reshape2)
+library(ggpubr)
 
 ## load up model and functions
 source('model_code/photosynthesis_model.R')
@@ -54,7 +56,7 @@ ltvllv_model_plot <- ggplot(select_ltvllv_long, aes(x = time, y = a_value, color
   scale_y_continuous(breaks = seq(0, 20, by = 2)) +
   scale_color_manual(values = c("#D55E00", "#009E73", "#0072B2"), 
                      labels = c(expression("A"["c"]), expression("A"["j"]), expression("A"["net"]))) +
-  annotate("text", x = 2, y = 13, label = expression("A"["total"]* " = 588687.4 units?"))
+  annotate("text", x = 13, y = 1, label = expression("A"["total"]* " = 586879.4 "*mu*"mol m"^"-2"), size = 3)
 
 ltvllv_model_plot
 
@@ -70,7 +72,7 @@ ltvhlv_model_plot <- ggplot(select_ltvhlv_long, aes(x = time, y = a_value, color
   scale_y_continuous(breaks = seq(0, 20, by = 2)) +
   scale_color_manual(values = c("#D55E00", "#009E73", "#0072B2"), 
                      labels = c(expression("A"["c"]), expression("A"["j"]), expression("A"["net"]))) +
-  annotate("text", x = 2, y = 15, label = expression("A"["total"]* " = 537904.1 units?"))
+  annotate("text", x = 13, y = 1, label = expression("A"["total"]* " = 586879.4 "*mu*"mol m"^"-2"), size = 3)
 
 ltvhlv_model_plot
 
@@ -86,7 +88,7 @@ htvllv_model_plot <- ggplot(select_htvllv_long, aes(x = time, y = a_value, color
   scale_y_continuous(breaks = seq(0, 20, by = 2)) +
   scale_color_manual(values = c("#D55E00", "#009E73", "#0072B2"), 
                      labels = c(expression("A"["c"]), expression("A"["j"]), expression("A"["net"]))) +
-  annotate("text", x = 2, y = 13, label = expression("A"["total"]* " = 586879.4 units?"))
+  annotate("text", x = 13, y = 1, label = expression("A"["total"]* " = 586879.4 "*mu*"mol m"^"-2"), size = 3)
 
 htvllv_model_plot
 
@@ -102,9 +104,12 @@ htvhlv_model_plot <- ggplot(select_htvhlv_long, aes(x = time, y = a_value, color
   scale_y_continuous(breaks = seq(0, 20, by = 2)) +
   scale_color_manual(values = c("#D55E00", "#009E73", "#0072B2"), 
                      labels = c(expression("A"["c"]), expression("A"["j"]), expression("A"["net"]))) +
-  annotate("text", x = 2, y = 15, label = expression("A"["total"]* " = 509523.4 units?"))
+  annotate("text", x = 13, y = 1, label = expression("A"["total"]* " = 586879.4 "*mu*"mol m"^"-2"), size = 3)
 
 htvhlv_model_plot
+
+ggarrange(ltvllv_model_plot, ltvhlv_model_plot, htvllv_model_plot, htvhlv_model_plot)
+#need to add panel letters
 
 ## average Anet value in a day #######
   # average "a" in a day * 86400 (number of seconds in day) = total photosynthesis in
