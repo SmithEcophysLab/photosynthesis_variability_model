@@ -1,5 +1,5 @@
 ### function to scale vcmax to different temperatures
-calc_vcmax_tresp_mult = function(tleaf, tmean, tref){
+calc_vcmax_tresp_mult = function(tleaf, tmean, tref){ # Kattge and Knorr (2007)
   
   temp <- tleaf + 273.15
   Ha <- 71513
@@ -17,7 +17,7 @@ calc_vcmax_tresp_mult = function(tleaf, tmean, tref){
 }
 
 ### function to scale jmax to different temperatures
-calc_jmax_tresp_mult = function(tleaf, tmean, tref){
+calc_jmax_tresp_mult = function(tleaf, tmean, tref){ # Kattge and Knorr (2007)
   
   temp <- tleaf + 273.15
   Ha <- 49884
